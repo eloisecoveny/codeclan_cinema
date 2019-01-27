@@ -26,7 +26,11 @@ class Ticket
     result = SqlRunner.run(sql, values)[0]
     screening = Screening.new(result)
     screening.sold += 1
-    screening.update()
+    if screening.sold <= screening.capacity
+      screening.update()
+    else
+      return nil
+    end
   end
 
   def self.delete_all()

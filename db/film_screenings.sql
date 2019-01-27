@@ -28,5 +28,3 @@ CREATE TABLE tickets (
   film_id INT4 REFERENCES films(id) ON DELETE CASCADE,
   screening_id INT4 REFERENCES screenings(id) ON DELETE CASCADE
 );
-
--- CHECK (screenings(no_tickets_sold) < screenings(capacity) or screening_id is null)
