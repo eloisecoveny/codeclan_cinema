@@ -1,5 +1,5 @@
 require_relative("../db/sql_runner")
-require("pry")
+
 class Screening
 
   attr_accessor :screening_time, :film_id, :sold
@@ -46,11 +46,5 @@ class Screening
   def no_tickets_sold()
     tickets_sold.length()
   end
-
-  # def sold_out()
-  #   if no_tickets_sold() == @capacity
-  #     return nil
-  #   end
-  # end
 
 end

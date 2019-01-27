@@ -1,5 +1,5 @@
 require_relative("../db/sql_runner.rb")
-require("pry")
+
 class Customer
 
   attr_accessor :name, :funds
@@ -27,12 +27,6 @@ class Customer
     results = SqlRunner.run(sql)
     return results.map { |customer| Customer.new(customer) }
   end
-
-  def self.map_items(customer_data)
-    result = customer_data.map { |customer| Customer.new(customer) }
-    return result
-  end
-
 
   def update()
     sql = "UPDATE customers SET (name, funds) = ($1, $2) WHERE id = $3"
