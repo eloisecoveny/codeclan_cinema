@@ -28,10 +28,6 @@ class Film
     return results.map { |film| Film.new(film) }
   end
 
-  def self.map_items(film_data)
-
-  end
-
   def update()
     sql = "UPDATE films SET (title, price) = ($1, $2) WHERE id = $3"
     values = [@title, @price, @id]
@@ -60,6 +56,18 @@ class Film
     values = [@id]
     customers = SqlRunner.run(sql, values)
     return customers.map { |customer| Customer.new(customer) }
+  end
+
+  def screenings()
+    sql = "SELECT * FROM screenings WHERE film_id = $1"
+    values = [@id]
+    results = SqlRunner.run(sql, values)
+    return results.map { |screening| Screening.new(screening) }
+  end
+
+  def most_popular_screening()
+    screenings()
+    return screenings.max_by { |screening| screening.no_tickets_sold() }.screening_time
   end
 
 end

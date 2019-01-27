@@ -53,6 +53,10 @@ class Customer
     return tickets.map { |ticket| Ticket.new(ticket) }
   end
 
+  def no_tickets()
+    return tickets.length()
+  end
+
   def films()
     sql = "SELECT films.* FROM films
     INNER JOIN tickets
@@ -65,9 +69,6 @@ class Customer
   end
 
   def buy_ticket(film)
-    sql = "INSERT INTO tickets (customer_id, film_id) VALUES ($1, $2)"
-    values = [@id, film.id]
-    SqlRunner.run(sql, values)
     @funds -= film.price
     update()
   end
